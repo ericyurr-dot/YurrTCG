@@ -406,6 +406,65 @@
     opacity:0.85;
   }
 
+  /* ===== Series Info Section ===== */
+  .series-info{
+    margin-top:8vh;
+    padding-top:6vh;
+    border-top:1px solid var(--line);
+  }
+  .series-info > p{
+    max-width:780px;
+    margin:0 auto 32px;
+    text-align:center;
+    line-height:1.75;
+    color:rgba(245,243,236,0.8);
+    font-size:1rem;
+  }
+  .series-info h3{
+    font-family:'Cinzel', serif;
+    color:var(--gold-light);
+    font-size:1.15rem;
+    letter-spacing:0.04em;
+    margin:32px auto 14px;
+    max-width:780px;
+    text-align:left;
+  }
+  .series-info ul{
+    list-style:none;
+    max-width:780px;
+    margin:0 auto 8px;
+    padding:18px 22px;
+    background:rgba(13,24,56,0.6);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .series-info ul li{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(212,175,106,0.12);
+    font-size:0.95rem;
+    color:rgba(245,243,236,0.85);
+  }
+  .series-info ul li:last-child{border-bottom:none;}
+  .series-info ul li::before{
+    content:"◆";
+    color:var(--gold);
+    font-size:0.7rem;
+    flex-shrink:0;
+  }
+  .checklist-example li{
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    letter-spacing:0.01em;
+    color:var(--ice);
+  }
+  .checklist-example li::before{
+    content:"▸";
+    color:var(--ice);
+  }
+
   /* ===== FAQ Page ===== */
   .faq-page{
     display:none;
@@ -544,6 +603,35 @@
         <div class="series-id">Brand/Manufacturer: YurrTCG &nbsp;|&nbsp; Series: Grail Box</div>
         <a href="https://docs.google.com/spreadsheets/d/1OGKFR0pPvKn_shwxHDcRZHvpYxSh9FkXeMC8pEyw7p8/edit?usp=sharing" target="_blank" rel="noopener" class="pull-list-link">View Full Checklist (Public Grail Box Pull List)</a>
       </div>
+    </div>
+
+    <div class="series-info">
+      <div class="section-head">
+        <span class="eyebrow">About The Series</span>
+        <h2>YurrTCG Grail Box Series</h2>
+        <div class="divider"></div>
+      </div>
+      <p>YurrTCG is an independent mystery card company producing high quality repacks containing ONE (1) raw or graded Pokémon card per Grail Box. The YurrTCG team sources from card shows, eBay, Whatnot, auction houses, and other trusted channels to curate top-tier pulls for the TCG community.</p>
+
+      <h3>Grail Box Series</h3>
+      <ul>
+        <li>The Grail Box Series features top-of-the-line modern chasers, Raw or Graded.</li>
+        <li>Each box has a guaranteed Pokémon Raw or Graded card, seeded by rarity.</li>
+        <li>Grail Box provides high tier raw or slabs for true collectors looking to expand their collections.</li>
+        <li>SINGLE SHOW SERIES</li>
+      </ul>
+
+      <h3>Example Checklist</h3>
+      <ul class="checklist-example">
+        <li>2023 POKEMON MEW EN-151 #205 CHARIZARD EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2025 POKEMON PRE EN-PRISMATIC EVOLUTIONS #161 UMBREON EX SPECIAL ILLUSTRATION RARE RAW</li>
+        <li>2023 POKEMON PAL EN-PALDEA EVOLVED #266 IONO SPECIAL ILLUSTRATION RARE PSA 9</li>
+        <li>2025 POKEMON ASC EN-ASCENDED HEROES #281 ROCKET'S MEWTWO EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2025 POKEMON PFL EN-PHANTASMAL FLAMES #125 MEGA CHARIZARD X EX SPECIAL ILLUSTRATION RARE PSA 9</li>
+        <li>2023 POKEMON SVP EN-SV BLACK STAR PROMO #085 PIKACHU WITH GREY FELT HAT (VAN GOGH) RAW</li>
+        <li>2024 POKEMON SSP EN-SURGING SPARKS #238 PIKACHU EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2025 POKEMON MEG EN-MEGA EVOLUTION #187 MEGA GARDEVOIR EX MEGA HYPER RARE PSA 10</li>
+      </ul>
     </div>
   </div>
 
