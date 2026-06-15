@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YurrTCG — Pokémon Mystery Boxes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#070b18;
+    --navy:#0d1838;
+    --navy-mid:#162958;
+    --royal:#27407e;
+    --gold:#d4af6a;
+    --gold-light:#f0dba8;
+    --ice:#8fd3ff;
+    --ivory:#f5f3ec;
+    --line: rgba(212,175,106,0.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--navy-deep);
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+
+  /* ===== Faceted crystal background ===== */
+  .facet-bg{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(143,211,255,0.18), transparent 35%),
+      radial-gradient(circle at 82% 78%, rgba(143,211,255,0.12), transparent 40%),
+      linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 45%, var(--navy-mid) 100%);
+  }
+  .facet-bg svg{position:absolute; inset:0; width:100%; height:100%; opacity:0.35;}
+
+  /* ===== Nav ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5vw;
+    background:rgba(7,11,24,0.75);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    text-decoration:none; color:var(--ivory);
+  }
+  .brand-mark{width:42px; height:42px; object-fit:contain; border-radius:50%;}
+  .brand-name{
+    font-family:'Cinzel', serif;
+    font-weight:700;
+    font-size:1.35rem;
+    letter-spacing:0.06em;
+    background:linear-gradient(180deg, var(--gold-light), var(--gold));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  nav ul{
+    display:flex; gap:32px; list-style:none;
+  }
+  nav a{
+    color:var(--ivory);
+    text-decoration:none;
+    font-size:0.92rem;
+    letter-spacing:0.04em;
+    font-weight:500;
+    opacity:0.85;
+    transition:opacity .2s, color .2s;
+    position:relative;
+  }
+  nav a:hover{opacity:1; color:var(--gold-light);}
+  nav a:focus-visible, .product-card:focus-visible, .back-link:focus-visible{
+    outline:2px solid var(--ice);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  @media (max-width: 760px){ nav ul{display:none;} }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:9vh 5vw 8vh;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:28px;
+    overflow:hidden;
+  }
+  .hero-crest{
+    width:160px; height:160px;
+    object-fit:contain;
+    filter:drop-shadow(0 0 30px rgba(143,211,255,0.35));
+    animation: float 7s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-10px);}
+  }
+  .hero h1{
+    font-family:'Cinzel Decorative', serif;
+    font-weight:900;
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    line-height:1.05;
+    letter-spacing:0.02em;
+    background:linear-gradient(180deg, #ffffff 0%, var(--gold-light) 45%, var(--gold) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 40px rgba(212,175,106,0.25);
+  }
+  .hero p.tagline{
+    font-family:'Cinzel', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1rem, 2vw, 1.3rem);
+    color:var(--ice);
+    letter-spacing:0.08em;
+    max-width:560px;
+  }
+  .hero .sub{
+    color:rgba(245,243,236,0.7);
+    max-width:600px;
+    font-size:1.02rem;
+    line-height:1.6;
+  }
+  .hero-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:6px;
+    padding:14px 36px;
+    border:1px solid var(--gold);
+    border-radius:2px;
+    color:var(--gold-light);
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-weight:700;
+    letter-spacing:0.12em;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    transition:background .25s, color .25s, box-shadow .25s;
+  }
+  .hero-cta:hover{
+    background:var(--gold);
+    color:var(--navy-deep);
+    box-shadow:0 0 24px rgba(212,175,106,0.4);
+  }
+
+  /* ===== Section heading ===== */
+  .section-head{
+    text-align:center;
+    margin: 0 auto 48px;
+    max-width:680px;
+  }
+  .section-head .eyebrow{
+    font-family:'Cinzel', serif;
+    color:var(--ice);
+    letter-spacing:0.25em;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    margin-bottom:10px;
+    display:block;
+  }
+  .section-head h2{
+    font-family:'Cinzel', serif;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    font-weight:700;
+    color:var(--ivory);
+    letter-spacing:0.03em;
+  }
+  .section-head .divider{
+    width:90px; height:1px;
+    margin:18px auto 0;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* ===== Products ===== */
+  .products{
+    padding:6vh 5vw 10vh;
+  }
+  .product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 280px));
+    justify-content:center;
+    gap:36px;
+  }
+  .product-card{
+    display:block;
+    background:linear-gradient(160deg, var(--navy-mid), var(--navy));
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:22px;
+    text-decoration:none;
+    color:var(--ivory);
+    cursor:pointer;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .product-card::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(143,211,255,0.12), transparent 60%);
+    opacity:0;
+    transition:opacity .3s;
+  }
+  .product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.45), 0 0 0 1px var(--gold);
+    border-color:var(--gold);
+  }
+  .product-card:hover::before{opacity:1;}
+  .product-card img{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid var(--line);
+    display:block;
+    margin-bottom:16px;
+    position:relative;
+    z-index:1;
+  }
+  .product-card .pname{
+    font-family:'Cinzel', serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:0.05em;
+    color:var(--gold-light);
+    text-align:center;
+    position:relative; z-index:1;
+  }
+  .product-card .pmeta{
+    text-align:center;
+    color:rgba(245,243,236,0.6);
+    font-size:0.85rem;
+    margin-top:6px;
+    letter-spacing:0.06em;
+    position:relative; z-index:1;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 5vw;
+    text-align:center;
+    color:rgba(245,243,236,0.5);
+    font-size:0.85rem;
+    letter-spacing:0.05em;
+  }
+  footer .tagline{
+    font-family:'Cinzel', serif;
+    font-style:italic;
+    color:var(--gold);
+    margin-bottom:8px;
+    font-size:0.95rem;
+  }
+
+  /* ===== Detail / Grail Box page ===== */
+  .detail-page{
+    display:none;
+    padding:6vh 5vw 10vh;
+    max-width:1000px;
+    margin:0 auto;
+  }
+  .detail-page.active{display:block;}
+  .home-page.hidden{display:none;}
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--ice);
+    text-decoration:none;
+    font-size:0.9rem;
+    letter-spacing:0.05em;
+    margin-bottom:36px;
+    font-weight:500;
+    transition:color .2s;
+  }
+  .back-link:hover{color:var(--gold-light);}
+
+  .detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  @media (max-width: 800px){
+    .detail-grid{grid-template-columns:1fr; gap:36px;}
+  }
+  .detail-img{
+    width:100%;
+    border-radius:14px;
+    border:1px solid var(--line);
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .detail-info .eyebrow{
+    font-family:'Cinzel', serif;
+    color:var(--ice);
+    letter-spacing:0.25em;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:block;
+  }
+  .detail-info h1{
+    font-family:'Cinzel Decorative', serif;
+    font-weight:900;
+    font-size:clamp(2.2rem, 5vw, 3.4rem);
+    line-height:1.1;
+    background:linear-gradient(180deg, #ffffff 0%, var(--gold-light) 45%, var(--gold) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom:18px;
+  }
+  .detail-info .price{
+    font-family:'Cinzel', serif;
+    font-size:1.6rem;
+    color:var(--gold-light);
+    margin-bottom:24px;
+    font-weight:700;
+  }
+  .detail-info p{
+    line-height:1.75;
+    color:rgba(245,243,236,0.8);
+    margin-bottom:18px;
+    font-size:1rem;
+  }
+  .detail-info ul{
+    list-style:none;
+    margin:24px 0 28px;
+    padding:18px 22px;
+    background:rgba(13,24,56,0.6);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .detail-info ul li{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding:8px 0;
+    border-bottom:1px solid rgba(212,175,106,0.12);
+    font-size:0.95rem;
+    color:rgba(245,243,236,0.85);
+  }
+  .detail-info ul li:last-child{border-bottom:none;}
+  .detail-info ul li::before{
+    content:"◆";
+    color:var(--gold);
+    font-size:0.7rem;
+  }
+  .buy-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 44px;
+    background:linear-gradient(135deg, var(--gold), var(--gold-light));
+    color:var(--navy-deep);
+    border:none;
+    border-radius:2px;
+    font-family:'Cinzel', serif;
+    font-weight:700;
+    letter-spacing:0.12em;
+    font-size:0.9rem;
+    text-transform:uppercase;
+    cursor:pointer;
+    transition:box-shadow .25s, transform .2s;
+  }
+  .buy-btn:hover{
+    box-shadow:0 0 30px rgba(212,175,106,0.5);
+    transform:translateY(-2px);
+  }
+  .stock-note{
+    margin-top:14px;
+    font-size:0.85rem;
+    color:var(--ice);
+    letter-spacing:0.05em;
+  }
+
+  /* ===== FAQ Page ===== */
+  .faq-page{
+    display:none;
+    padding:6vh 5vw 10vh;
+    max-width:780px;
+    margin:0 auto;
+  }
+  .faq-page.active{display:block;}
+  .faq-page h1{
+    font-family:'Cinzel Decorative', serif;
+    font-weight:900;
+    font-size:clamp(2.2rem, 5vw, 3.2rem);
+    background:linear-gradient(180deg, #ffffff 0%, var(--gold-light) 45%, var(--gold) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom:40px;
+    text-align:center;
+  }
+  .faq-item{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:rgba(13,24,56,0.5);
+    padding:24px 28px;
+    margin-bottom:18px;
+  }
+  .faq-item h3{
+    font-family:'Cinzel', serif;
+    color:var(--gold-light);
+    font-size:1.1rem;
+    margin-bottom:10px;
+    letter-spacing:0.02em;
+  }
+  .faq-item p{
+    color:rgba(245,243,236,0.8);
+    line-height:1.7;
+    font-size:0.98rem;
+  }
+  .faq-item a{
+    color:var(--ice);
+    text-decoration:underline;
+    text-decoration-color:rgba(143,211,255,0.35);
+  }
+  .faq-item a:hover{color:var(--gold-light);}
+</style>
+</head>
+<body>
+
+<div class="facet-bg">
+  <svg viewBox="0 0 1200 1200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#162958"/>
+        <stop offset="1" stop-color="#0d1838"/>
+      </linearGradient>
+    </defs>
+    <g stroke="rgba(143,211,255,0.10)" fill="rgba(143,211,255,0.025)" stroke-width="1">
+      <polygon points="0,0 300,120 120,380 0,300"/>
+      <polygon points="300,120 600,0 700,260 120,380"/>
+      <polygon points="600,0 1200,150 900,400 700,260"/>
+      <polygon points="120,380 700,260 900,400 600,650 250,600"/>
+      <polygon points="900,400 1200,150 1200,500 1100,700 600,650"/>
+      <polygon points="0,300 120,380 250,600 0,700"/>
+      <polygon points="250,600 600,650 700,900 350,1000 100,900"/>
+      <polygon points="600,650 1100,700 1000,1000 700,900"/>
+      <polygon points="1100,700 1200,500 1200,1000 1000,1000"/>
+      <polygon points="0,700 100,900 0,1200"/>
+      <polygon points="100,900 350,1000 300,1200 0,1200"/>
+      <polygon points="350,1000 700,900 1000,1000 850,1200 300,1200"/>
+      <polygon points="1000,1000 1200,1000 1200,1200 850,1200"/>
+    </g>
+  </svg>
+</div>
+
+<header>
+  <a href="#" class="brand" onclick="showHome()">
+    <img src="yurrtcg-logo.png" class="brand-mark" alt="YurrTCG logo">
+    <span class="brand-name">YurrTCG</span>
+  </a>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showHome()">Home</a></li>
+      <li><a href="#products">Mystery Boxes</a></li>
+      <li><a href="#faq" onclick="showFAQ(event)">FAQ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===== HOME PAGE ===== -->
+  <div class="home-page" id="home-page">
+
+    <section class="hero">
+      <img src="yurrtcg-logo.png" class="hero-crest" alt="YurrTCG crest">
+      <h1>YurrTCG</h1>
+      <p class="tagline">Crack the seal. Chase the grail.</p>
+      <p class="sub">YurrTCG drops curated mystery slabs for collectors who live for the rip. Every box is loaded, every pull hits different — your next grail could be one seal away.</p>
+      <a href="#products" class="hero-cta">Browse Mystery Boxes</a>
+    </section>
+
+    <section class="products" id="products">
+      <div class="section-head">
+        <span class="eyebrow">The Lineup</span>
+        <h2>Mystery Boxes</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="product-grid">
+        <a href="#grail-box" class="product-card" onclick="showDetail(event)">
+          <img src="grail-box.png" alt="YurrTCG Grail Box — dark blue and gold crystal-themed mystery box featuring the YurrTCG dragon crest">
+          <div class="pname">Grail Box</div>
+          <div class="pmeta">One pull. Pure heat.</div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== GRAIL BOX DETAIL PAGE ===== -->
+  <div class="detail-page" id="grail-box">
+    <a href="#" class="back-link" onclick="showHome()">&larr; Back to Mystery Boxes</a>
+    <div class="detail-grid">
+      <img src="grail-box.png" class="detail-img" alt="YurrTCG Grail Box — dark blue and gold crystal-themed mystery box featuring the YurrTCG dragon crest, includes 1 official Pokémon grail">
+      <div class="detail-info">
+        <span class="eyebrow">YurrTCG Original</span>
+        <h1>Grail Box</h1>
+        <p>The Grail Box is built for collectors chasing the big one. Sealed under the YurrTCG crest, each box is stacked with potential and built around a single standout pull worth showing off.</p>
+        <p>Every box is shipped sealed to our streamers, who open it live on stream — so you get to watch your pull happen in real time before it's carefully packed and sent your way.</p>
+        <ul>
+          <li>One official graded or raw Pokémon card pull</li>
+          <li>Shipped sealed and opened live by our streamers</li>
+          <li>Carefully packed for safe arrival after your pull</li>
+          <li>Checked for authenticity before it ships</li>
+        </ul>
+        <div class="stock-note">Available now on our WhatNot streams</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FAQ PAGE ===== -->
+  <div class="faq-page" id="faq-page">
+    <a href="#" class="back-link" onclick="showHome()">&larr; Back to Home</a>
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq-item">
+      <h3>Where can I buy these packs?</h3>
+      <p>All YurrTCG mystery boxes are sold live on our WhatNot streams. Follow us there to catch upcoming drops and grab a box before it's gone.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>What's inside these packs?</h3>
+      <p>Each box includes one official graded Pokémon card or one raw Pokémon card — every pull is a shot at something special.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How can I reach out?</h3>
+      <p>For questions about our boxes or upcoming drops, reach out to any streamer hosting YurrTCG bags during a live — they're happy to help.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="tagline">Built for the rip.</div>
+  &copy; 2026 YurrTCG. All rights reserved.
+</footer>
+
+<script>
+  function showDetail(e){
+    e.preventDefault();
+    document.getElementById('home-page').classList.add('hidden');
+    document.getElementById('faq-page').classList.remove('active');
+    document.getElementById('grail-box').classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.pushState(null, '', '#grail-box');
+  }
+  function showHome(e){
+    if(e) e.preventDefault();
+    document.getElementById('home-page').classList.remove('hidden');
+    document.getElementById('grail-box').classList.remove('active');
+    document.getElementById('faq-page').classList.remove('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.pushState(null, '', '#');
+  }
+  function showFAQ(e){
+    if(e) e.preventDefault();
+    document.getElementById('home-page').classList.add('hidden');
+    document.getElementById('grail-box').classList.remove('active');
+    document.getElementById('faq-page').classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.pushState(null, '', '#faq');
+  }
+  // Handle direct load with hash
+  if(window.location.hash === '#grail-box'){
+    document.getElementById('home-page').classList.add('hidden');
+    document.getElementById('grail-box').classList.add('active');
+  } else if(window.location.hash === '#faq'){
+    document.getElementById('home-page').classList.add('hidden');
+    document.getElementById('faq-page').classList.add('active');
+  }
+</script>
+
+</body>
+</html>
