@@ -603,16 +603,17 @@
   }
   @media (max-width: 760px){
     .trust-badge-1{
-      bottom:110px;
+      bottom:auto;
+      top:80px;
       left:50%;
-      transform:translateX(-50%) translateY(40px);
       right:auto;
+      transform:translateX(-50%) translateY(-30px);
     }
     .trust-badge-2{
-      bottom:28px;
+      bottom:24px;
       left:50%;
-      transform:translateX(-50%) translateY(40px);
       right:auto;
+      transform:translateX(-50%) translateY(30px);
     }
     .trust-badge-1.visible{
       transform:translateX(-50%) translateY(0);
@@ -621,13 +622,14 @@
       transform:translateX(-50%) translateY(0);
     }
     .trust-badge-1.dismissed{
-      transform:translateX(-50%) translateY(20px) !important;
+      transform:translateX(-50%) translateY(-30px) !important;
     }
     .trust-badge-2.dismissed{
-      transform:translateX(-50%) translateY(20px) !important;
+      transform:translateX(-50%) translateY(30px) !important;
     }
     .trust-badge{
       max-width:85vw;
+      width:85vw;
     }
   }
 </style>
