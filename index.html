@@ -603,7 +603,7 @@
   }
   @media (max-width: 760px){
     .trust-badge-1{
-      bottom:90px;
+      bottom:110px;
       left:50%;
       transform:translateX(-50%) translateY(40px);
       right:auto;
@@ -805,13 +805,19 @@
 </footer>
 
 <script>
-  // Trust badges — slide in after 2s
+  // Trust badges — slide in after 2s, auto-dismiss after 5s on mobile
   setTimeout(function(){
     document.getElementById('trust-badge-1').classList.add('visible');
   }, 2000);
   setTimeout(function(){
     document.getElementById('trust-badge-2').classList.add('visible');
   }, 2400);
+  if(window.innerWidth <= 760){
+    setTimeout(function(){
+      document.getElementById('trust-badge-1').classList.add('dismissed');
+      document.getElementById('trust-badge-2').classList.add('dismissed');
+    }, 7000); // 2s delay + 5s visible = 7s total
+  }
 
   function toggleNav(btn){
     btn.classList.toggle('open');
