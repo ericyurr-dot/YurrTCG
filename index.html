@@ -50,6 +50,7 @@
     background:rgba(7,11,24,0.75);
     backdrop-filter: blur(10px);
     border-bottom:1px solid var(--line);
+    position:relative;
   }
   .brand{
     display:flex; align-items:center; gap:12px;
@@ -85,7 +86,40 @@
     outline-offset:3px;
     border-radius:4px;
   }
-  @media (max-width: 760px){ nav ul{display:none;} }
+  @media (max-width: 760px){
+    nav ul{
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:100%;
+      left:0; right:0;
+      background:rgba(7,11,24,0.97);
+      border-bottom:1px solid var(--line);
+      padding:16px 5vw 24px;
+      gap:18px;
+    }
+    nav ul.open{ display:flex; }
+    .hamburger{
+      display:flex;
+      flex-direction:column;
+      gap:5px;
+      cursor:pointer;
+      padding:6px;
+      background:none;
+      border:none;
+    }
+    .hamburger span{
+      display:block;
+      width:24px; height:2px;
+      background:var(--ivory);
+      border-radius:2px;
+      transition:transform .25s, opacity .25s;
+    }
+    .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2){ opacity:0; }
+    .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  }
+  @media (min-width: 761px){ .hamburger{ display:none; } }
 
   /* ===== Hero ===== */
   .hero{
@@ -545,10 +579,13 @@
     <span class="brand-name">YurrTCG</span>
   </a>
   <nav>
-    <ul>
-      <li><a href="#" onclick="showHome()">Home</a></li>
-      <li><a href="#products">Mystery Boxes</a></li>
-      <li><a href="#faq" onclick="showFAQ(event)">FAQ</a></li>
+    <button class="hamburger" onclick="toggleNav(this)" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-menu">
+      <li><a href="#" onclick="closeNav(); showHome()">Home</a></li>
+      <li><a href="#products" onclick="closeNav()">Mystery Boxes</a></li>
+      <li><a href="#faq" onclick="closeNav(); showFAQ(event)">FAQ</a></li>
     </ul>
   </nav>
 </header>
@@ -599,7 +636,7 @@
           <li>Carefully packed for safe arrival after your pull</li>
           <li>Checked for authenticity before it ships</li>
         </ul>
-        <div class="stock-note">Available now on our WhatNot streams</div>
+        <div class="stock-note">Available at our vendor booths and through sellers on WhatNot</div>
         <div class="series-id">Brand/Manufacturer: YurrTCG &nbsp;|&nbsp; Series: Grail Box</div>
         <a href="https://docs.google.com/spreadsheets/d/1OGKFR0pPvKn_shwxHDcRZHvpYxSh9FkXeMC8pEyw7p8/edit?usp=sharing" target="_blank" rel="noopener" class="pull-list-link">View Full Checklist (Public Grail Box Pull List)</a>
       </div>
@@ -642,7 +679,7 @@
 
     <div class="faq-item">
       <h3>Where can I buy these packs?</h3>
-      <p>All YurrTCG mystery boxes are sold live on our WhatNot streams. Follow us there to catch upcoming drops and grab a box before it's gone.</p>
+      <p>YurrTCG Grail Boxes are available at our vendor booths and through sellers on WhatNot. Follow our WhatNot sellers to catch upcoming drops and grab a box before it's gone.</p>
     </div>
 
     <div class="faq-item">
@@ -652,7 +689,7 @@
 
     <div class="faq-item">
       <h3>How can I reach out?</h3>
-      <p>For questions about our boxes or upcoming drops, reach out to any streamer hosting YurrTCG bags during a live — they're happy to help.</p>
+      <p>For questions about our boxes or upcoming drops, email us at <a href="mailto:YurrTCG@gmail.com">YurrTCG@gmail.com</a> — we're happy to help.</p>
     </div>
   </div>
 
@@ -664,6 +701,14 @@
 </footer>
 
 <script>
+  function toggleNav(btn){
+    btn.classList.toggle('open');
+    document.getElementById('nav-menu').classList.toggle('open');
+  }
+  function closeNav(){
+    document.querySelector('.hamburger').classList.remove('open');
+    document.getElementById('nav-menu').classList.remove('open');
+  }
   function showDetail(e){
     e.preventDefault();
     document.getElementById('home-page').classList.add('hidden');
