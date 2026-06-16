@@ -543,9 +543,78 @@
     text-decoration-color:rgba(143,211,255,0.35);
   }
   .faq-item a:hover{color:var(--gold-light);}
+  /* ===== Trust Badges ===== */
+  .trust-badge{
+    position:fixed;
+    z-index:100;
+    background:linear-gradient(135deg, rgba(13,24,56,0.98), rgba(22,41,88,0.98));
+    border:1px solid var(--gold);
+    border-radius:12px;
+    padding:16px 22px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 0 24px rgba(212,175,106,0.2);
+    opacity:0;
+    max-width:260px;
+    transition:opacity 0.5s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .trust-badge-1{
+    bottom:28px;
+    left:28px;
+    transform:translateX(-120%);
+  }
+  .trust-badge-2{
+    bottom:28px;
+    right:28px;
+    transform:translateX(120%);
+  }
+  .trust-badge.visible{
+    transform:translateX(0);
+    opacity:1;
+  }
+  .trust-badge-icon{
+    font-size:2rem;
+    flex-shrink:0;
+  }
+  .trust-badge-text{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .trust-badge-title{
+    font-family:'Cinzel', serif;
+    font-size:0.95rem;
+    font-weight:700;
+    color:var(--gold-light);
+    letter-spacing:0.06em;
+  }
+  .trust-badge-sub{
+    font-size:0.82rem;
+    color:rgba(245,243,236,0.85);
+    letter-spacing:0.03em;
+    line-height:1.4;
+  }
 </style>
 </head>
 <body>
+
+<!-- Trust Badges -->
+<div class="trust-badge trust-badge-1" id="trust-badge-1">
+  <div class="trust-badge-icon">🏆</div>
+  <div class="trust-badge-text">
+    <div class="trust-badge-title">Trusted Resealer</div>
+    <div class="trust-badge-sub">100+ Verified Sales</div>
+  </div>
+</div>
+
+<div class="trust-badge trust-badge-2" id="trust-badge-2">
+  <div class="trust-badge-icon">📍</div>
+  <div class="trust-badge-text">
+    <div class="trust-badge-title">Based in Queens, NY</div>
+    <div class="trust-badge-sub">Serving collectors nationwide</div>
+  </div>
+</div>
 
 <div class="facet-bg">
   <svg viewBox="0 0 1200 1200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -701,6 +770,14 @@
 </footer>
 
 <script>
+  // Trust badges — slide in after 2s
+  setTimeout(function(){
+    document.getElementById('trust-badge-1').classList.add('visible');
+  }, 2000);
+  setTimeout(function(){
+    document.getElementById('trust-badge-2').classList.add('visible');
+  }, 2400);
+
   function toggleNav(btn){
     btn.classList.toggle('open');
     document.getElementById('nav-menu').classList.toggle('open');
