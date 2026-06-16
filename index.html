@@ -558,6 +558,7 @@
     opacity:0;
     max-width:260px;
     transition:opacity 0.5s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    cursor:pointer;
   }
   .trust-badge-1{
     bottom:28px;
@@ -572,6 +573,11 @@
   .trust-badge.visible{
     transform:translateX(0);
     opacity:1;
+  }
+  .trust-badge.dismissed{
+    opacity:0 !important;
+    transform:translateY(20px) !important;
+    pointer-events:none;
   }
   .trust-badge-icon{
     font-size:2rem;
@@ -595,12 +601,41 @@
     letter-spacing:0.03em;
     line-height:1.4;
   }
+  @media (max-width: 760px){
+    .trust-badge-1{
+      bottom:90px;
+      left:50%;
+      transform:translateX(-50%) translateY(40px);
+      right:auto;
+    }
+    .trust-badge-2{
+      bottom:28px;
+      left:50%;
+      transform:translateX(-50%) translateY(40px);
+      right:auto;
+    }
+    .trust-badge-1.visible{
+      transform:translateX(-50%) translateY(0);
+    }
+    .trust-badge-2.visible{
+      transform:translateX(-50%) translateY(0);
+    }
+    .trust-badge-1.dismissed{
+      transform:translateX(-50%) translateY(20px) !important;
+    }
+    .trust-badge-2.dismissed{
+      transform:translateX(-50%) translateY(20px) !important;
+    }
+    .trust-badge{
+      max-width:85vw;
+    }
+  }
 </style>
 </head>
 <body>
 
 <!-- Trust Badges -->
-<div class="trust-badge trust-badge-1" id="trust-badge-1">
+<div class="trust-badge trust-badge-1" id="trust-badge-1" onclick="this.classList.add('dismissed')">
   <div class="trust-badge-icon">🏆</div>
   <div class="trust-badge-text">
     <div class="trust-badge-title">Trusted Resealer</div>
@@ -608,7 +643,7 @@
   </div>
 </div>
 
-<div class="trust-badge trust-badge-2" id="trust-badge-2">
+<div class="trust-badge trust-badge-2" id="trust-badge-2" onclick="this.classList.add('dismissed')">
   <div class="trust-badge-icon">📍</div>
   <div class="trust-badge-text">
     <div class="trust-badge-title">Based in Queens, NY</div>
