@@ -780,6 +780,38 @@
     min-height:100vh;
   }
   .terms-page.active{ display:block; }
+  /* ===== Current Series Badge ===== */
+  .current-series-badge{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:12px;
+    padding:20px;
+    background:rgba(13,24,56,0.7);
+    border:1px solid var(--gold);
+    border-radius:10px;
+    margin-bottom:16px;
+  }
+  .cs-item{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .cs-label{
+    font-family:'Cinzel', serif;
+    font-size:0.7rem;
+    color:var(--gold);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+  }
+  .cs-value{
+    font-size:0.88rem;
+    color:var(--ivory);
+    letter-spacing:0.02em;
+  }
+  .cs-active{
+    color:#4ade80;
+    font-weight:600;
+  }
 </style>
 </head>
 <body>
@@ -882,11 +914,11 @@
       <div class="detail-info">
         <span class="eyebrow">YurrTCG Original</span>
         <h1>Grail Box</h1>
-        <div class="price">$200</div>
+        <div class="price">$650</div>
         <p>The Grail Box is built for collectors chasing the big one. Sealed under the YurrTCG crest, each box is stacked with potential and built around a single standout pull worth showing off.</p>
         <p>Every box is shipped sealed to our streamers, who open it live on stream — so you get to watch your pull happen in real time before it's carefully packed and sent your way.</p>
         <ul>
-          <li>One official graded or raw Pokémon card pull</li>
+          <li>One official PSA graded Pokémon card</li>
           <li>Shipped sealed and opened live by our streamers</li>
           <li>Carefully packed for safe arrival after your pull</li>
           <li>Checked for authenticity before it ships</li>
@@ -907,146 +939,125 @@
 
       <h3>Grail Box Series</h3>
       <ul>
-        <li>The Grail Box Series features top-of-the-line modern chasers, Raw or Graded.</li>
-        <li>Each box has a guaranteed Pokémon Raw or Graded card, seeded by rarity.</li>
-        <li>Grail Box provides high tier raw or slabs for true collectors looking to expand their collections.</li>
+        <li>The Grail Box Series features top-of-the-line modern chasers, PSA Graded.</li>
+        <li>Each box has a guaranteed PSA graded Pokémon card, seeded by rarity.</li>
+        <li>Grail Box provides high tier PSA graded slabs for true collectors looking to expand their collections.</li>
         <li>SINGLE SHOW SERIES</li>
       </ul>
 
-      <h3>Example Checklist</h3>
+      <h3>Current Series Checklist — Series #001</h3>
+      <div class="current-series-badge">
+        <div class="cs-item"><span class="cs-label">Series</span><span class="cs-value">Grail Box Series #001</span></div>
+        <div class="cs-item"><span class="cs-label">Manufacturer</span><span class="cs-value">YurrTCG</span></div>
+        <div class="cs-item"><span class="cs-label">Condition</span><span class="cs-value">All items PSA graded slabs by The Pokémon Company</span></div>
+        <div class="cs-item"><span class="cs-label">Boxes Available</span><span class="cs-value">8</span></div>
+        <div class="cs-item"><span class="cs-label">Finalized</span><span class="cs-value">June 10, 2026</span></div>
+        <div class="cs-item"><span class="cs-label">Status</span><span class="cs-value cs-active">● Active</span></div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(245,243,236,0.5);margin-bottom:10px;">Finalized: June 10, 2026 · 8 boxes · All items PSA graded slabs by The Pokémon Company</p>
       <ul class="checklist-example">
-        <li>2023 POKEMON MEW EN-151 #205 CHARIZARD EX SPECIAL ILLUSTRATION RARE PSA 10</li>
-        <li>2025 POKEMON PRE EN-PRISMATIC EVOLUTIONS #161 UMBREON EX SPECIAL ILLUSTRATION RARE RAW</li>
-        <li>2023 POKEMON PAL EN-PALDEA EVOLVED #266 IONO SPECIAL ILLUSTRATION RARE PSA 9</li>
-        <li>2025 POKEMON ASC EN-ASCENDED HEROES #281 ROCKET'S MEWTWO EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2023 POKEMON MEW EN-151 #205 CHARIZARD EX SPECIAL ILLUSTRATION RARE PSA 9</li>
+        <li>2023 POKEMON MEW EN-151 #203 VENUSAUR EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2023 POKEMON MEW EN-151 #199 BLASTOISE EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2025 POKEMON PRE EN-PRISMATIC EVOLUTIONS #153 JOLTEON EX SPECIAL ILLUSTRATION RARE PSA 10</li>
+        <li>2025 POKEMON DRI EN-DESTINED RIVALS #237 ROCKET'S MEWTWO EX SPECIAL ILLUSTRATION RARE PSA 9</li>
+        <li>2025 POKEMON BLK EN-BLACK BOLT #171 ZEKROM EX BLACK WHITE RARE PSA 9</li>
         <li>2025 POKEMON PFL EN-PHANTASMAL FLAMES #125 MEGA CHARIZARD X EX SPECIAL ILLUSTRATION RARE PSA 9</li>
-        <li>2023 POKEMON SVP EN-SV BLACK STAR PROMO #085 PIKACHU WITH GREY FELT HAT (VAN GOGH) RAW</li>
-        <li>2024 POKEMON SSP EN-SURGING SPARKS #238 PIKACHU EX SPECIAL ILLUSTRATION RARE PSA 10</li>
-        <li>2025 POKEMON MEG EN-MEGA EVOLUTION #187 MEGA GARDEVOIR EX MEGA HYPER RARE PSA 10</li>
+        <li>2025 POKEMON ASC EN-ASCENDED HEROES #294 MEGA CHARIZARD Y EX MEGA HYPER RARE PSA 9</li>
       </ul>
     </div>
 
     <!-- Tier List -->
     <div class="tier-list">
       <div class="section-head">
-        <span class="eyebrow">Example Pulls by Value</span>
+        <span class="eyebrow">Series #001 — Pull Tiers</span>
         <h2>Hit Tier List</h2>
         <div class="divider"></div>
-        <p style="color:rgba(245,243,236,0.6); font-size:0.85rem; margin-top:12px;">The following are example hits from our checklist. Actual pulls may vary. Prices based on current TCGPlayer market prices (raw) and recent PSA sales data.</p>
+        <p style="color:rgba(245,243,236,0.6); font-size:0.85rem; margin-top:12px;">Based on actual Series #001 cards. Every box contains one guaranteed PSA graded slab. Values based on recent PSA sales data.</p>
       </div>
 
       <div class="tier-row tier-grail">
         <div class="tier-label">
           <span class="tier-icon">💎</span>
           <span class="tier-name">Grail</span>
-          <span class="tier-price">$800+</span>
+          <span class="tier-price">$700+</span>
         </div>
         <div class="tier-cards">
-          <div class="tier-card">2025 Pokémon PRE EN-Prismatic Evolutions #161 Umbreon ex Special Illustration Rare PSA 10 (~$1,500–$2,900)</div>
-          <div class="tier-card">2025 Pokémon PRE EN-Prismatic Evolutions #161 Umbreon ex Special Illustration Rare Raw (~$1,150)</div>
-          <div class="tier-card">2025 Pokémon ASC EN-Ascended Heroes #284 Mega Gengar ex Special Illustration Rare PSA 10 (~$1,000–$1,500)</div>
-          <div class="tier-card">2023 Pokémon SVP EN-SV Black Star Promo #085 Pikachu with Grey Felt Hat (Van Gogh) PSA 10 (~$800–$1,000)</div>
+          <div class="tier-card">2025 Pokémon PFL EN-Phantasmal Flames #125 Mega Charizard X ex Special Illustration Rare PSA 9</div>
+          <div class="tier-card">2025 Pokémon PRE EN-Prismatic Evolutions #153 Jolteon ex Special Illustration Rare PSA 10</div>
+          <div class="tier-card">2023 Pokémon MEW EN-151 #199 Blastoise ex Special Illustration Rare PSA 10</div>
+          <div class="tier-card">2025 Pokémon ASC EN-Ascended Heroes #294 Mega Charizard Y ex Mega Hyper Rare PSA 9</div>
         </div>
       </div>
 
       <div class="tier-row tier-gold">
         <div class="tier-label">
-          <span class="tier-icon">🥇</span>
-          <span class="tier-name">Gold</span>
-          <span class="tier-price">$200–$799</span>
+          <span class="tier-icon">🔥</span>
+          <span class="tier-name">Top Hit</span>
+          <span class="tier-price">$600–$699</span>
         </div>
         <div class="tier-cards">
-          <div class="tier-card">2023 Pokémon MEW EN-151 #205 Charizard ex Special Illustration Rare PSA 10 (~$400–$500)</div>
-          <div class="tier-card">2025 Pokémon PFL EN-Phantasmal Flames #125 Mega Charizard X ex Special Illustration Rare PSA 10 (~$300–$500)</div>
-          <div class="tier-card">2023 Pokémon SVP EN-SV Black Star Promo #085 Pikachu with Grey Felt Hat (Van Gogh) Raw (~$200–$350)</div>
-          <div class="tier-card">2023 Pokémon PAL EN-Paldea Evolved #266 Iono Special Illustration Rare PSA 10 (~$200–$300)</div>
+          <div class="tier-card">2025 Pokémon DRI EN-Destined Rivals #237 Team Rocket's Mewtwo ex Special Illustration Rare PSA 9</div>
+          <div class="tier-card">2025 Pokémon BLK EN-Black Bolt #171 Zekrom ex Black White Rare PSA 9</div>
+          <div class="tier-card">2023 Pokémon MEW EN-151 #203 Venusaur ex Special Illustration Rare PSA 10</div>
         </div>
       </div>
 
       <div class="tier-row tier-silver">
         <div class="tier-label">
-          <span class="tier-icon">🥈</span>
-          <span class="tier-name">Silver</span>
-          <span class="tier-price">$75–$199</span>
+          <span class="tier-icon">⚡</span>
+          <span class="tier-name">Chase</span>
+          <span class="tier-price">$500 and under</span>
         </div>
         <div class="tier-cards">
-          <div class="tier-card">2023 Pokémon MEW EN-151 #205 Charizard ex Special Illustration Rare Raw (~$220–$270)</div>
-          <div class="tier-card">2023 Pokémon PAL EN-Paldea Evolved #266 Iono Special Illustration Rare PSA 9 (~$150–$200)</div>
-          <div class="tier-card">2024 Pokémon SSP EN-Surging Sparks #238 Pikachu ex Special Illustration Rare PSA 10 (~$100–$150)</div>
-          <div class="tier-card">2023 Pokémon PAL EN-Paldea Evolved #266 Iono Special Illustration Rare Raw (~$75–$100)</div>
-        </div>
-      </div>
-
-      <div class="tier-row tier-bronze">
-        <div class="tier-label">
-          <span class="tier-icon">🥉</span>
-          <span class="tier-name">Bronze</span>
-          <span class="tier-price">$25–$74</span>
-        </div>
-        <div class="tier-cards">
-          <div class="tier-card">2023 Pokémon MEW EN-151 #199 Blastoise ex Special Illustration Rare Raw (~$30–$50)</div>
-          <div class="tier-card">2023 Pokémon SVI EN-Scarlet & Violet #245 Miraidon ex Special Illustration Rare Raw (~$30–$50)</div>
-          <div class="tier-card">2024 Pokémon PAF EN-Paldean Fates #232 Mew ex Special Illustration Rare Raw (~$25–$45)</div>
-          <div class="tier-card">2024 Pokémon SFA EN-Shrouded Fable #86 Gengar ex Special Illustration Rare Raw (~$25–$45)</div>
+          <div class="tier-card">2023 Pokémon MEW EN-151 #205 Charizard ex Special Illustration Rare PSA 9</div>
         </div>
       </div>
 
       <!-- Pull Rates -->
       <div class="pull-rates">
         <div class="section-head" style="margin-top:6vh;">
-          <span class="eyebrow">Odds & Transparency</span>
+          <span class="eyebrow">Odds &amp; Transparency</span>
           <h2>Pull Rates</h2>
           <div class="divider"></div>
-          <p style="color:rgba(245,243,236,0.6); font-size:0.85rem; margin-top:12px;">Pull rates calculated from our published checklist of 132 items. Every box contains one guaranteed pull.</p>
+          <p style="color:rgba(245,243,236,0.6); font-size:0.85rem; margin-top:12px;">Pull rates based on Series #001 (8 boxes). Every box contains one guaranteed PSA graded slab.</p>
         </div>
 
         <div class="pull-rate-grid">
-          <div class="pull-rate-row tier-bronze-rate">
-            <div class="pull-rate-tier">
-              <span>🥉</span>
-              <span class="pull-rate-name">Bronze</span>
-              <span class="pull-rate-price">$25–$74</span>
-            </div>
-            <div class="pull-rate-bar-wrap">
-              <div class="pull-rate-bar" style="width:47.7%;background:linear-gradient(90deg,#8b4a1a,#d4956a);"></div>
-            </div>
-            <div class="pull-rate-pct">47.7%</div>
-          </div>
-
           <div class="pull-rate-row tier-silver-rate">
             <div class="pull-rate-tier">
-              <span>🥈</span>
-              <span class="pull-rate-name">Silver</span>
-              <span class="pull-rate-price">$75–$199</span>
+              <span>⚡</span>
+              <span class="pull-rate-name">Chase</span>
+              <span class="pull-rate-price">$500 and under</span>
             </div>
             <div class="pull-rate-bar-wrap">
-              <div class="pull-rate-bar" style="width:31.8%;background:linear-gradient(90deg,#2a4a6a,#8fb8d8);"></div>
+              <div class="pull-rate-bar" style="width:12.5%;background:linear-gradient(90deg,#2a4a6a,#8fb8d8);min-width:18px;"></div>
             </div>
-            <div class="pull-rate-pct">31.8%</div>
+            <div class="pull-rate-pct">12.5%</div>
           </div>
 
           <div class="pull-rate-row tier-gold-rate">
             <div class="pull-rate-tier">
               <span>🥇</span>
-              <span class="pull-rate-name">Gold</span>
-              <span class="pull-rate-price">$200–$799</span>
+              <span class="pull-rate-name">Top Hit</span>
+              <span class="pull-rate-price">$600–$699</span>
             </div>
             <div class="pull-rate-bar-wrap">
-              <div class="pull-rate-bar" style="width:13.6%;background:linear-gradient(90deg,#7a5500,var(--gold-light));"></div>
+              <div class="pull-rate-bar" style="width:37.5%;background:linear-gradient(90deg,#7a5500,var(--gold-light));"></div>
             </div>
-            <div class="pull-rate-pct">13.6%</div>
+            <div class="pull-rate-pct">37.5%</div>
           </div>
 
           <div class="pull-rate-row tier-grail-rate">
             <div class="pull-rate-tier">
               <span>💎</span>
               <span class="pull-rate-name">Grail</span>
-              <span class="pull-rate-price">$800+</span>
+              <span class="pull-rate-price">$700+</span>
             </div>
             <div class="pull-rate-bar-wrap">
-              <div class="pull-rate-bar" style="width:6.8%;background:linear-gradient(90deg,#3a1a8a,#c9b3ff);min-width:18px;"></div>
+              <div class="pull-rate-bar" style="width:50%;background:linear-gradient(90deg,#3a1a8a,#c9b3ff);"></div>
             </div>
-            <div class="pull-rate-pct">6.8%</div>
+            <div class="pull-rate-pct">50%</div>
           </div>
         </div>
       </div>
@@ -1065,7 +1076,7 @@
 
     <div class="faq-item">
       <h3>What's inside these packs?</h3>
-      <p>Each box includes one official graded Pokémon card or one raw Pokémon card — every pull is a shot at something special.</p>
+      <p>Each box includes one official PSA graded Pokémon card — every pull is a shot at something special.</p>
     </div>
 
     <div class="faq-item">
