@@ -632,6 +632,154 @@
       width:85vw;
     }
   }
+  /* ===== Tier List ===== */
+  .tier-list{
+    margin-top:8vh;
+    padding-top:6vh;
+    border-top:1px solid var(--line);
+    max-width:860px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .tier-row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:16px;
+    margin-bottom:16px;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .tier-label{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    padding:18px 12px;
+  }
+  .tier-icon{ font-size:2rem; }
+  .tier-name{
+    font-family:'Cinzel', serif;
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:0.08em;
+  }
+  .tier-price{
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    opacity:0.85;
+  }
+  .tier-cards{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+    padding:16px;
+    background:rgba(13,24,56,0.5);
+  }
+  .tier-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:6px;
+    padding:6px 12px;
+    font-size:0.82rem;
+    color:rgba(245,243,236,0.9);
+    letter-spacing:0.02em;
+  }
+  .tier-grail .tier-label{ background:linear-gradient(135deg,#1a1040,#2d1b6e); }
+  .tier-grail .tier-name{ color:#c9b3ff; }
+  .tier-grail .tier-price{ color:#c9b3ff; }
+  .tier-grail .tier-card{ border-color:rgba(201,179,255,0.25); }
+
+  .tier-gold .tier-label{ background:linear-gradient(135deg,#1a1200,#3d2d00); }
+  .tier-gold .tier-name{ color:var(--gold-light); }
+  .tier-gold .tier-price{ color:var(--gold); }
+  .tier-gold .tier-card{ border-color:rgba(212,175,106,0.25); }
+
+  .tier-silver .tier-label{ background:linear-gradient(135deg,#141a22,#1e2d3d); }
+  .tier-silver .tier-name{ color:#b8cfe8; }
+  .tier-silver .tier-price{ color:#8fb8d8; }
+  .tier-silver .tier-card{ border-color:rgba(184,207,232,0.2); }
+
+  .tier-bronze .tier-label{ background:linear-gradient(135deg,#1a0e06,#3d1f0a); }
+  .tier-bronze .tier-name{ color:#d4956a; }
+  .tier-bronze .tier-price{ color:#b87040; }
+  .tier-bronze .tier-card{ border-color:rgba(212,149,106,0.2); }
+
+  @media(max-width:600px){
+    .tier-row{ grid-template-columns:1fr; }
+    .tier-label{ flex-direction:row; justify-content:flex-start; padding:12px 16px; gap:10px; }
+    .tier-icon{ font-size:1.4rem; }
+  }
+  /* ===== Pull Rates ===== */
+  .pull-rate-grid{
+    max-width:860px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .pull-rate-row{
+    display:grid;
+    grid-template-columns:180px 1fr 52px;
+    align-items:center;
+    gap:16px;
+    padding:14px 20px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:rgba(13,24,56,0.5);
+  }
+  .pull-rate-tier{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .pull-rate-name{
+    font-family:'Cinzel', serif;
+    font-size:0.9rem;
+    font-weight:700;
+    letter-spacing:0.04em;
+  }
+  .pull-rate-price{
+    font-size:0.72rem;
+    opacity:0.7;
+    margin-left:4px;
+  }
+  .pull-rate-bar-wrap{
+    height:12px;
+    background:rgba(255,255,255,0.07);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .pull-rate-bar{
+    height:100%;
+    border-radius:6px;
+    transition:width 1s ease;
+  }
+  .pull-rate-pct{
+    font-family:'Cinzel', serif;
+    font-size:0.9rem;
+    font-weight:700;
+    color:var(--gold-light);
+    text-align:right;
+  }
+  @media(max-width:600px){
+    .pull-rate-row{
+      grid-template-columns:1fr 36px;
+      grid-template-rows:auto auto;
+    }
+    .pull-rate-tier{ grid-column:1; }
+    .pull-rate-pct{ grid-column:2; grid-row:1; }
+    .pull-rate-bar-wrap{ grid-column:1/3; grid-row:2; }
+  }
+  /* ===== Terms Page ===== */
+  .terms-page{
+    display:none;
+    background:var(--navy-deep);
+    min-height:100vh;
+  }
+  .terms-page.active{ display:block; }
 </style>
 </head>
 <body>
@@ -734,6 +882,7 @@
       <div class="detail-info">
         <span class="eyebrow">YurrTCG Original</span>
         <h1>Grail Box</h1>
+        <div class="price">$200</div>
         <p>The Grail Box is built for collectors chasing the big one. Sealed under the YurrTCG crest, each box is stacked with potential and built around a single standout pull worth showing off.</p>
         <p>Every box is shipped sealed to our streamers, who open it live on stream — so you get to watch your pull happen in real time before it's carefully packed and sent your way.</p>
         <ul>
@@ -742,7 +891,7 @@
           <li>Carefully packed for safe arrival after your pull</li>
           <li>Checked for authenticity before it ships</li>
         </ul>
-        <div class="stock-note">Available at our vendor booths and through sellers on WhatNot</div>
+        <div class="stock-note">Currently available at Pokémon shows in NYC and through sellers on WhatNot — not available online at this time.</div>
         <div class="series-id">Brand/Manufacturer: YurrTCG &nbsp;|&nbsp; Series: Grail Box</div>
         <a href="https://docs.google.com/spreadsheets/d/1OGKFR0pPvKn_shwxHDcRZHvpYxSh9FkXeMC8pEyw7p8/edit?usp=sharing" target="_blank" rel="noopener" class="pull-list-link">View Full Checklist (Public Grail Box Pull List)</a>
       </div>
@@ -776,6 +925,132 @@
         <li>2025 POKEMON MEG EN-MEGA EVOLUTION #187 MEGA GARDEVOIR EX MEGA HYPER RARE PSA 10</li>
       </ul>
     </div>
+
+    <!-- Tier List -->
+    <div class="tier-list">
+      <div class="section-head">
+        <span class="eyebrow">Example Pulls by Value</span>
+        <h2>Hit Tier List</h2>
+        <div class="divider"></div>
+        <p style="color:rgba(245,243,236,0.6); font-size:0.85rem; margin-top:12px;">The following are example hits from our checklist. Actual pulls may vary. Prices based on current TCGPlayer market prices (raw) and recent PSA sales data.</p>
+      </div>
+
+      <div class="tier-row tier-grail">
+        <div class="tier-label">
+          <span class="tier-icon">💎</span>
+          <span class="tier-name">Grail</span>
+          <span class="tier-price">$800+</span>
+        </div>
+        <div class="tier-cards">
+          <div class="tier-card">2025 Pokémon PRE EN-Prismatic Evolutions #161 Umbreon ex Special Illustration Rare PSA 10 (~$1,500–$2,900)</div>
+          <div class="tier-card">2025 Pokémon PRE EN-Prismatic Evolutions #161 Umbreon ex Special Illustration Rare Raw (~$1,150)</div>
+          <div class="tier-card">2025 Pokémon ASC EN-Ascended Heroes #284 Mega Gengar ex Special Illustration Rare PSA 10 (~$1,000–$1,500)</div>
+          <div class="tier-card">2023 Pokémon SVP EN-SV Black Star Promo #085 Pikachu with Grey Felt Hat (Van Gogh) PSA 10 (~$800–$1,000)</div>
+        </div>
+      </div>
+
+      <div class="tier-row tier-gold">
+        <div class="tier-label">
+          <span class="tier-icon">🥇</span>
+          <span class="tier-name">Gold</span>
+          <span class="tier-price">$200–$799</span>
+        </div>
+        <div class="tier-cards">
+          <div class="tier-card">2023 Pokémon MEW EN-151 #205 Charizard ex Special Illustration Rare PSA 10 (~$400–$500)</div>
+          <div class="tier-card">2025 Pokémon PFL EN-Phantasmal Flames #125 Mega Charizard X ex Special Illustration Rare PSA 10 (~$300–$500)</div>
+          <div class="tier-card">2023 Pokémon SVP EN-SV Black Star Promo #085 Pikachu with Grey Felt Hat (Van Gogh) Raw (~$200–$350)</div>
+          <div class="tier-card">2023 Pokémon PAL EN-Paldea Evolved #266 Iono Special Illustration Rare PSA 10 (~$200–$300)</div>
+        </div>
+      </div>
+
+      <div class="tier-row tier-silver">
+        <div class="tier-label">
+          <span class="tier-icon">🥈</span>
+          <span class="tier-name">Silver</span>
+          <span class="tier-price">$75–$199</span>
+        </div>
+        <div class="tier-cards">
+          <div class="tier-card">2023 Pokémon MEW EN-151 #205 Charizard ex Special Illustration Rare Raw (~$220–$270)</div>
+          <div class="tier-card">2023 Pokémon PAL EN-Paldea Evolved #266 Iono Special Illustration Rare PSA 9 (~$150–$200)</div>
+          <div class="tier-card">2024 Pokémon SSP EN-Surging Sparks #238 Pikachu ex Special Illustration Rare PSA 10 (~$100–$150)</div>
+          <div class="tier-card">2023 Pokémon PAL EN-Paldea Evolved #266 Iono Special Illustration Rare Raw (~$75–$100)</div>
+        </div>
+      </div>
+
+      <div class="tier-row tier-bronze">
+        <div class="tier-label">
+          <span class="tier-icon">🥉</span>
+          <span class="tier-name">Bronze</span>
+          <span class="tier-price">$25–$74</span>
+        </div>
+        <div class="tier-cards">
+          <div class="tier-card">2023 Pokémon MEW EN-151 #199 Blastoise ex Special Illustration Rare Raw (~$30–$50)</div>
+          <div class="tier-card">2023 Pokémon SVI EN-Scarlet & Violet #245 Miraidon ex Special Illustration Rare Raw (~$30–$50)</div>
+          <div class="tier-card">2024 Pokémon PAF EN-Paldean Fates #232 Mew ex Special Illustration Rare Raw (~$25–$45)</div>
+          <div class="tier-card">2024 Pokémon SFA EN-Shrouded Fable #86 Gengar ex Special Illustration Rare Raw (~$25–$45)</div>
+        </div>
+      </div>
+
+      <!-- Pull Rates -->
+      <div class="pull-rates">
+        <div class="section-head" style="margin-top:6vh;">
+          <span class="eyebrow">Odds & Transparency</span>
+          <h2>Pull Rates</h2>
+          <div class="divider"></div>
+          <p style="color:rgba(245,243,236,0.6); font-size:0.85rem; margin-top:12px;">Pull rates calculated from our published checklist of 132 items. Every box contains one guaranteed pull.</p>
+        </div>
+
+        <div class="pull-rate-grid">
+          <div class="pull-rate-row tier-bronze-rate">
+            <div class="pull-rate-tier">
+              <span>🥉</span>
+              <span class="pull-rate-name">Bronze</span>
+              <span class="pull-rate-price">$25–$74</span>
+            </div>
+            <div class="pull-rate-bar-wrap">
+              <div class="pull-rate-bar" style="width:47.7%;background:linear-gradient(90deg,#8b4a1a,#d4956a);"></div>
+            </div>
+            <div class="pull-rate-pct">47.7%</div>
+          </div>
+
+          <div class="pull-rate-row tier-silver-rate">
+            <div class="pull-rate-tier">
+              <span>🥈</span>
+              <span class="pull-rate-name">Silver</span>
+              <span class="pull-rate-price">$75–$199</span>
+            </div>
+            <div class="pull-rate-bar-wrap">
+              <div class="pull-rate-bar" style="width:31.8%;background:linear-gradient(90deg,#2a4a6a,#8fb8d8);"></div>
+            </div>
+            <div class="pull-rate-pct">31.8%</div>
+          </div>
+
+          <div class="pull-rate-row tier-gold-rate">
+            <div class="pull-rate-tier">
+              <span>🥇</span>
+              <span class="pull-rate-name">Gold</span>
+              <span class="pull-rate-price">$200–$799</span>
+            </div>
+            <div class="pull-rate-bar-wrap">
+              <div class="pull-rate-bar" style="width:13.6%;background:linear-gradient(90deg,#7a5500,var(--gold-light));"></div>
+            </div>
+            <div class="pull-rate-pct">13.6%</div>
+          </div>
+
+          <div class="pull-rate-row tier-grail-rate">
+            <div class="pull-rate-tier">
+              <span>💎</span>
+              <span class="pull-rate-name">Grail</span>
+              <span class="pull-rate-price">$800+</span>
+            </div>
+            <div class="pull-rate-bar-wrap">
+              <div class="pull-rate-bar" style="width:6.8%;background:linear-gradient(90deg,#3a1a8a,#c9b3ff);min-width:18px;"></div>
+            </div>
+            <div class="pull-rate-pct">6.8%</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ===== FAQ PAGE ===== -->
@@ -785,7 +1060,7 @@
 
     <div class="faq-item">
       <h3>Where can I buy these packs?</h3>
-      <p>YurrTCG Grail Boxes are available at our vendor booths and through sellers on WhatNot. Follow our WhatNot sellers to catch upcoming drops and grab a box before it's gone.</p>
+      <p>YurrTCG Grail Boxes are currently available at Pokémon shows in New York City and through sellers on WhatNot. We are not available for online purchase at this time — follow our WhatNot sellers to catch upcoming drops.</p>
     </div>
 
     <div class="faq-item">
@@ -804,7 +1079,79 @@
 <footer>
   <div class="tagline">Built for the rip.</div>
   &copy; 2026 YurrTCG. All rights reserved.
+  <div style="margin-top:12px;">
+    <a href="#" onclick="showTerms(event)" style="color:var(--ice);font-size:0.8rem;letter-spacing:0.05em;text-decoration:underline;text-decoration-color:rgba(143,211,255,0.35);">Terms &amp; Privacy Policy</a>
+  </div>
 </footer>
+
+<!-- ===== TERMS & PRIVACY PAGE ===== -->
+<div class="terms-page" id="terms-page">
+  <div style="max-width:780px;margin:0 auto;padding:6vh 5vw 10vh;">
+    <a href="#" class="back-link" onclick="showHome()">&larr; Back to Home</a>
+    <h1 style="font-family:'Cinzel Decorative',serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);background:linear-gradient(180deg,#ffffff 0%,var(--gold-light) 45%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px;text-align:center;">Terms &amp; Privacy Policy</h1>
+    <p style="text-align:center;color:rgba(245,243,236,0.5);font-size:0.8rem;letter-spacing:0.05em;margin-bottom:40px;">Last updated: June 15, 2026</p>
+
+    <div class="faq-item">
+      <h3>About YurrTCG</h3>
+      <p>YurrTCG operates this website to provide you with information about our Grail Box mystery products and related services. By accessing or using this website, you agree to the terms outlined on this page.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>All Sales Are Final</h3>
+      <p>All purchases of YurrTCG Grail Boxes are final. Due to the nature of mystery box products — where the contents are unknown until opened on stream — we do not offer refunds, returns, or exchanges under any circumstances. By purchasing a Grail Box, you acknowledge and accept this policy.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>No Guarantee of Pull Value</h3>
+      <p>The tier list, pull rates, and example cards shown on this website are for informational purposes only and are based on our published checklist. YurrTCG makes no guarantee that any specific card, tier, or value will be pulled from any individual box. Card market values fluctuate and past pulls are not indicative of future results.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Product Authenticity</h3>
+      <p>YurrTCG sources all cards from reputable channels including card shows, auction houses, and verified sellers. Every card is checked for authenticity before being sealed and assigned to a box. PSA-graded cards are authenticated by Professional Sports Authenticator (PSA) and come in their original sealed slab.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Single Show Series Disclosure</h3>
+      <p>YurrTCG Grail Boxes are sold as a Single Show Series. Each series is finalized prior to sale, and the number of boxes and individual items within a series will not change once finalized. A full public checklist is available for each batch via the link on our product page.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Age Requirement</h3>
+      <p>YurrTCG products are intended for collectors aged 18 and older. By purchasing a Grail Box, you confirm that you are at least 18 years of age. We do not knowingly collect personal information from individuals under the age of 18.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Personal Information We Collect</h3>
+      <p>When you interact with this website or purchase a Grail Box through WhatNot or at a live event, we may collect basic contact and transaction information such as your name, email address, and purchase details. This information is used solely to fulfill your order, respond to inquiries, and improve our services. We do not sell your personal information to third parties.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>How We Use Your Information</h3>
+      <p>We use your information to process and fulfill orders, provide customer support, send order-related communications, and improve the YurrTCG experience. We may also use it to send promotional updates about upcoming drops or events — you may opt out of these at any time by contacting us directly.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Third-Party Platforms</h3>
+      <p>YurrTCG products are sold through WhatNot and at live events. Purchases made through WhatNot are subject to WhatNot's own terms of service and privacy policy. YurrTCG is not responsible for the data practices of third-party platforms. Links to external websites do not constitute our endorsement of those sites.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Security</h3>
+      <p>We take reasonable precautions to protect your information. However, no method of transmission over the internet is 100% secure. We recommend not sharing sensitive information through unsecured channels. YurrTCG is not liable for unauthorized access beyond our reasonable control.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Changes to This Policy</h3>
+      <p>We may update these terms and this privacy policy from time to time to reflect changes in our practices or legal requirements. Updates will be posted on this page with a revised date. Continued use of this website after any changes constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>Contact</h3>
+      <p>For questions about these terms, your privacy, or your purchase, please contact us at <a href="mailto:YurrTCG@gmail.com">YurrTCG@gmail.com</a>.</p>
+    </div>
+  </div>
+</div>
 
 <script>
   // Trust badges — slide in after 2s, auto-dismiss after 5s on mobile
@@ -837,11 +1184,21 @@
     window.scrollTo({top:0, behavior:'smooth'});
     history.pushState(null, '', '#grail-box');
   }
+  function showTerms(e){
+    if(e) e.preventDefault();
+    document.getElementById('home-page').classList.add('hidden');
+    document.getElementById('grail-box').classList.remove('active');
+    document.getElementById('faq-page').classList.remove('active');
+    document.getElementById('terms-page').classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.pushState(null, '', '#terms');
+  }
   function showHome(e){
     if(e) e.preventDefault();
     document.getElementById('home-page').classList.remove('hidden');
     document.getElementById('grail-box').classList.remove('active');
     document.getElementById('faq-page').classList.remove('active');
+    document.getElementById('terms-page').classList.remove('active');
     window.scrollTo({top:0, behavior:'smooth'});
     history.pushState(null, '', '#');
   }
